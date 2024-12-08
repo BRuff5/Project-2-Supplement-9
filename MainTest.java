@@ -4,25 +4,23 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-
 public class MainTest {
-
+    
     @Test
     public void testGetEvenNumbers() {
-        // Test with a typical list of numbers
+        // Typical input
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> expectedEvenNumbers = Arrays.asList(2, 4, 6);
         assertEquals(expectedEvenNumbers, main.getEvenNumbers(numbers));
 
-        // Test with an empty list
-        List<Integer> emptyList = Collections.emptyList();
-        assertEquals(Collections.emptyList(), main.getEvenNumbers(emptyList));
+        // Empty input
+        assertEquals(Collections.emptyList(), main.getEvenNumbers(Collections.emptyList()));
 
-        // Test with no even numbers
+        // No even numbers
         List<Integer> oddList = Arrays.asList(1, 3, 5, 7);
         assertEquals(Collections.emptyList(), main.getEvenNumbers(oddList));
 
-        // Test with mixed numbers
+        // Mixed numbers including negative
         List<Integer> mixedList = Arrays.asList(0, -1, -2, -3, -4);
         List<Integer> expectedMixedEvenNumbers = Arrays.asList(0, -2, -4);
         assertEquals(expectedMixedEvenNumbers, main.getEvenNumbers(mixedList));
@@ -30,22 +28,45 @@ public class MainTest {
 
     @Test
     public void testConvertToUpperCase() {
-        // Test with a typical string
+        // Regular string
         String input = "hello world";
         String expectedResult = "HELLO WORLD";
         assertEquals(expectedResult, main.convertToUpperCase(input));
 
-        // Test with an empty string
-        String emptyInput = "";
-        String expectedEmptyResult = "Invalid input. Please provide a non-empty string.";
-        assertEquals(expectedEmptyResult, main.convertToUpperCase(emptyInput));
+        // Empty string
+        assertEquals("Invalid input. Please provide a non-empty string.", main.convertToUpperCase(""));
 
-        // Test with null input
-        String nullInput = null;
-        assertEquals(expectedEmptyResult, main.convertToUpperCase(nullInput));
+        // Null input
+        assertEquals("Invalid input. Please provide a non-empty string.", main.convertToUpperCase(null));
 
-        // Test with already uppercase input
+        // Already uppercase string
         String uppercaseInput = "ALREADY UPPERCASE";
         assertEquals(uppercaseInput, main.convertToUpperCase(uppercaseInput));
+    }
+
+    @Test
+    public void testGetLongestString() {
+        // Normal case
+        List<String> words = Arrays.asList("hello", "world", "java", "programming");
+        String expectedLongest = "programming";
+        assertEquals(expectedLongest, main.getLongestString(words));
+
+        // Empty list
+        assertEquals("Invalid input. Please provide a non-empty list of words.", main.getLongestString(Collections.emptyList()));
+
+        // Null list
+        assertEquals("Invalid input. Please provide a non-empty list of words.", main.getLongestString(null));
+
+        // Multiple strings of the same max length
+        List<String> equalLengthWords = Arrays.asList("aaa", "bbb", "cc");
+        assertEquals("aaa", main.getLongestString(equalLengthWords));  // return the first longest string
+    }
+
+    private void assertEquals(List<Integer> expectedEvenNumbers, List<Integer> evenNumbers) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    private void assertEquals(String expectedResult, String convertToUpperCase) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
