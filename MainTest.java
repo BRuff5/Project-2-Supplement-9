@@ -1,59 +1,51 @@
 import org.junit.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+
 
 public class MainTest {
 
     @Test
     public void testGetEvenNumbers() {
-        // Arrange
-        List<Integer> inputList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        List<Integer> expectedEvenNumbers = Arrays.asList(2, 4, 6, 8, 10);
+        // Test with a typical list of numbers
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> expectedEvenNumbers = Arrays.asList(2, 4, 6);
+        assertEquals(expectedEvenNumbers, main.getEvenNumbers(numbers));
 
-        // Act
-        List<Integer> actualEvenNumbers = main.getEvenNumbers(inputList);
+        // Test with an empty list
+        List<Integer> emptyList = Collections.emptyList();
+        assertEquals(Collections.emptyList(), main.getEvenNumbers(emptyList));
 
-        // Assert
-        Assert.assertEquals(expectedEvenNumbers, actualEvenNumbers);
+        // Test with no even numbers
+        List<Integer> oddList = Arrays.asList(1, 3, 5, 7);
+        assertEquals(Collections.emptyList(), main.getEvenNumbers(oddList));
+
+        // Test with mixed numbers
+        List<Integer> mixedList = Arrays.asList(0, -1, -2, -3, -4);
+        List<Integer> expectedMixedEvenNumbers = Arrays.asList(0, -2, -4);
+        assertEquals(expectedMixedEvenNumbers, main.getEvenNumbers(mixedList));
     }
 
     @Test
-    public void testGetEvenNumbersWithNoEvens() {
-        // Arrange
-        List<Integer> inputList = Arrays.asList(1, 3, 5, 7, 9);
-        List<Integer> expectedEvenNumbers = Arrays.asList();
+    public void testConvertToUpperCase() {
+        // Test with a typical string
+        String input = "hello world";
+        String expectedResult = "HELLO WORLD";
+        assertEquals(expectedResult, main.convertToUpperCase(input));
 
-        // Act
-        List<Integer> actualEvenNumbers = main.getEvenNumbers(inputList);
+        // Test with an empty string
+        String emptyInput = "";
+        String expectedEmptyResult = "Invalid input. Please provide a non-empty string.";
+        assertEquals(expectedEmptyResult, main.convertToUpperCase(emptyInput));
 
-        // Assert
-        Assert.assertEquals(expectedEvenNumbers, actualEvenNumbers);
-    }
+        // Test with null input
+        String nullInput = null;
+        assertEquals(expectedEmptyResult, main.convertToUpperCase(nullInput));
 
-    @Test
-    public void testGetEvenNumbersWithAllEvens() {
-        // Arrange
-        List<Integer> inputList = Arrays.asList(2, 4, 6, 8, 10);
-        List<Integer> expectedEvenNumbers = Arrays.asList(2, 4, 6, 8, 10);
-
-        // Act
-        List<Integer> actualEvenNumbers = main.getEvenNumbers(inputList);
-
-        // Assert
-        Assert.assertEquals(expectedEvenNumbers, actualEvenNumbers);
-    }
-
-    @Test
-    public void testGetEvenNumbersWithEmptyList() {
-        // Arrange
-        List<Integer> inputList = Arrays.asList();
-        List<Integer> expectedEvenNumbers = Arrays.asList();
-
-        // Act
-        List<Integer> actualEvenNumbers = main.getEvenNumbers(inputList);
-
-        // Assert
-        Assert.assertEquals(expectedEvenNumbers, actualEvenNumbers);
+        // Test with already uppercase input
+        String uppercaseInput = "ALREADY UPPERCASE";
+        assertEquals(uppercaseInput, main.convertToUpperCase(uppercaseInput));
     }
 }
